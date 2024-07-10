@@ -16,7 +16,7 @@ class user():
         else:
             return "未知"
 
-    def getLogin(self):
+    def getLoginInformation(self):
         url = "https://hfs-be.yunxiao.com/v2/users/sessions"
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
