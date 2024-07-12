@@ -1,4 +1,5 @@
 import requests
+from requests import RequestException
 
 
 class user():
@@ -30,5 +31,10 @@ class user():
             "roleType": self.roleType,
             "rememberMe": self.rememberMe
         }
-        response = requests.post(url, json=data, headers=headers)
-        return response.json()
+        try:
+            login = requests.post(url, headers=headers, data=data)
+            login.raise_for_status()
+            return login.json()
+        except RequestException as e:
+            print(f"在获取登录信息时发生错误：{e}")
+            return None
