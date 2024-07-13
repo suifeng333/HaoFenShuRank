@@ -2,7 +2,7 @@ import requests
 from requests import RequestException
 
 
-class user():
+class getLogin():
     def __init__(self, loginName, password, roleType, rememberMe):
         self.loginName = loginName
         self.password = password
@@ -33,8 +33,12 @@ class user():
         }
         try:
             login = requests.post(url, headers=headers, data=data)
+            loginJson = login.json()
             login.raise_for_status()
-            return login.json()
+            if 'msg' in loginJson and loginJson['msg'] == '登录成功':
+                return loginJson
+            elif 'msg' in loginJson and loginJson['msg'] == '密码错误':
+                return print("密码错误")
         except RequestException as e:
             print(f"在获取登录信息时发生错误：{e}")
             return None
