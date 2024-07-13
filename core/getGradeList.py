@@ -23,4 +23,12 @@ class GradeList:
             'Origin': 'https://www.haofenshu.com',
             'Referer': 'https://www.haofenshu.com/'
         }
-        gradeList = requests.post(url, headers=headers, data=self.getLoginCookies()).json()
+        checkCookies = self.getLoginCookies()
+        if checkCookies:
+            headers.update(checkCookies)
+            response = requests.post(url, headers=headers)
+            response.raise_for_status()
+            gradeList = response.json()
+        else:
+            gradeList = None
+
