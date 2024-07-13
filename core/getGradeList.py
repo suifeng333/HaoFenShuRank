@@ -29,6 +29,30 @@ class GradeList:
             response = requests.post(url, headers=headers)
             response.raise_for_status()
             gradeList = response.json()
+            exam = gradeList.get('data', {}).get('list', [])
+            examsInfo = []
+            for i in exam:
+                examClassName = i.get('className')
+                examName = i.get('name')
+                examScore = i.get('scoreS')
+                examClassRankLevel = i.get('classRankPart')
+                examClassRank = i.get('classRank')
+                examClassDefeatRatio = i.get('classDefeatRatio')
+                examGradeRankLevel = i.get('gradeRankPart')
+                examGradeRank = i.get('gradeRank')
+                examGradeDefeatRatio = i.get('gradeDefeatRatio')
+                examInfo = {
+                    'examClassName': examClassName,
+                    'examName': examName,
+                    'examScore': examScore,
+                    'examClassRankLevel': examClassRankLevel,
+                    'examClassRank': examClassRank,
+                    'examClassDefeatRatio': examClassDefeatRatio,
+                    'examGradeRankLevel': examGradeRankLevel,
+                    'examGradeRank': examGradeRank,
+                    'examGradeDefeatRatio': examGradeDefeatRatio
+                }
+            examsInfo.append(examInfo)
+            return examsInfo
         else:
-            gradeList = None
-
+            return None
