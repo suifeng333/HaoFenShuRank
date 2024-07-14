@@ -52,7 +52,7 @@ class GradeList:
                     'examGradeRank': examGradeRank,
                     'examGradeDefeatRatio': examGradeDefeatRatio
                 }
-            examsInfo.append(examInfo)
+                examsInfo.append(examInfo)
             return examsInfo
         else:
             return None
