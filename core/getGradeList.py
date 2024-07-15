@@ -1,4 +1,4 @@
-from getLogin import getLogin
+from core.getLogin import getLogin
 import requests
 
 
